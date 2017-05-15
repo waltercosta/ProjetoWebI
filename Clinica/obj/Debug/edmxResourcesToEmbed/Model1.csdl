@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_CLINICAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CONSULTA">
+    <Key>
+      <PropertyRef Name="cons_id" />
+    </Key>
+    <Property Name="cons_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cons_turno" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="cons_situacao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cons_dataConsulta" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="pac_id" Type="Int32" Nullable="false" />
+    <Property Name="med_id" Type="Int32" Nullable="false" />
+    <Property Name="conv_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CONVENIO" Relationship="Self.FK_CONSULTA_CONVENIO" FromRole="CONSULTA" ToRole="CONVENIO" />
+    <NavigationProperty Name="MEDICO" Relationship="Self.FK_CONSULTA_MEDICO" FromRole="CONSULTA" ToRole="MEDICO" />
+    <NavigationProperty Name="PACIENTE" Relationship="Self.FK_CONSULTA_PACIENTE" FromRole="CONSULTA" ToRole="PACIENTE" />
+  </EntityType>
+  <EntityType Name="CONVENIO">
+    <Key>
+      <PropertyRef Name="conv_id" />
+    </Key>
+    <Property Name="conv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="conv_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="conv_sigla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="conv_fone" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CONSULTA" Relationship="Self.FK_CONSULTA_CONVENIO" FromRole="CONVENIO" ToRole="CONSULTA" />
+    <NavigationProperty Name="EXAME" Relationship="Self.FK_EXAME_CONVENIO" FromRole="CONVENIO" ToRole="EXAME" />
+  </EntityType>
+  <EntityType Name="EXAME">
+    <Key>
+      <PropertyRef Name="exa_id" />
+    </Key>
+    <Property Name="exa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="exa_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="exa_observacoes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pac_id" Type="Int32" Nullable="false" />
+    <Property Name="exa_valor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="conv_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CONVENIO" Relationship="Self.FK_EXAME_CONVENIO" FromRole="EXAME" ToRole="CONVENIO" />
+    <NavigationProperty Name="PACIENTE" Relationship="Self.FK_EXAME_PACIENTE" FromRole="EXAME" ToRole="PACIENTE" />
+  </EntityType>
+  <EntityType Name="MEDICO">
+    <Key>
+      <PropertyRef Name="med_id" />
+    </Key>
+    <Property Name="med_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="med_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="med_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="med_cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="med_fone" Type="Int32" />
+    <Property Name="med_crm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="med_cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="med_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="med_qtd_atend" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CONSULTA" Relationship="Self.FK_CONSULTA_MEDICO" FromRole="MEDICO" ToRole="CONSULTA" />
+  </EntityType>
+  <EntityType Name="PACIENTE">
+    <Key>
+      <PropertyRef Name="pac_id" />
+    </Key>
+    <Property Name="pac_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pac_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pac_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pac_cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pac_fone" Type="Int32" />
+    <Property Name="pac_dataNasc" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="pac_sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="pac_plano" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pac_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pac_cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CONSULTA" Relationship="Self.FK_CONSULTA_PACIENTE" FromRole="PACIENTE" ToRole="CONSULTA" />
+    <NavigationProperty Name="EXAME" Relationship="Self.FK_EXAME_PACIENTE" FromRole="PACIENTE" ToRole="EXAME" />
+  </EntityType>
+  <Association Name="FK_CONSULTA_CONVENIO">
+    <End Role="CONVENIO" Type="Self.CONVENIO" Multiplicity="1" />
+    <End Role="CONSULTA" Type="Self.CONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONVENIO">
+        <PropertyRef Name="conv_id" />
+      </Principal>
+      <Dependent Role="CONSULTA">
+        <PropertyRef Name="conv_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONSULTA_MEDICO">
+    <End Role="MEDICO" Type="Self.MEDICO" Multiplicity="1" />
+    <End Role="CONSULTA" Type="Self.CONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICO">
+        <PropertyRef Name="med_id" />
+      </Principal>
+      <Dependent Role="CONSULTA">
+        <PropertyRef Name="med_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONSULTA_PACIENTE">
+    <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="1" />
+    <End Role="CONSULTA" Type="Self.CONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PACIENTE">
+        <PropertyRef Name="pac_id" />
+      </Principal>
+      <Dependent Role="CONSULTA">
+        <PropertyRef Name="pac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAME_CONVENIO">
+    <End Role="CONVENIO" Type="Self.CONVENIO" Multiplicity="1" />
+    <End Role="EXAME" Type="Self.EXAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONVENIO">
+        <PropertyRef Name="conv_id" />
+      </Principal>
+      <Dependent Role="EXAME">
+        <PropertyRef Name="conv_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAME_PACIENTE">
+    <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="1" />
+    <End Role="EXAME" Type="Self.EXAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PACIENTE">
+        <PropertyRef Name="pac_id" />
+      </Principal>
+      <Dependent Role="EXAME">
+        <PropertyRef Name="pac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClinicaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CONSULTA" EntityType="Self.CONSULTA" />
+    <EntitySet Name="CONVENIO" EntityType="Self.CONVENIO" />
+    <EntitySet Name="EXAME" EntityType="Self.EXAME" />
+    <EntitySet Name="MEDICO" EntityType="Self.MEDICO" />
+    <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" />
+    <AssociationSet Name="FK_CONSULTA_CONVENIO" Association="Self.FK_CONSULTA_CONVENIO">
+      <End Role="CONVENIO" EntitySet="CONVENIO" />
+      <End Role="CONSULTA" EntitySet="CONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONSULTA_MEDICO" Association="Self.FK_CONSULTA_MEDICO">
+      <End Role="MEDICO" EntitySet="MEDICO" />
+      <End Role="CONSULTA" EntitySet="CONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONSULTA_PACIENTE" Association="Self.FK_CONSULTA_PACIENTE">
+      <End Role="PACIENTE" EntitySet="PACIENTE" />
+      <End Role="CONSULTA" EntitySet="CONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAME_CONVENIO" Association="Self.FK_EXAME_CONVENIO">
+      <End Role="CONVENIO" EntitySet="CONVENIO" />
+      <End Role="EXAME" EntitySet="EXAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAME_PACIENTE" Association="Self.FK_EXAME_PACIENTE">
+      <End Role="PACIENTE" EntitySet="PACIENTE" />
+      <End Role="EXAME" EntitySet="EXAME" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

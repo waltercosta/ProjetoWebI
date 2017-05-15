@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_CLINICAModelStoreContainer" CdmEntityContainer="ClinicaEntities">
+    <EntitySetMapping Name="CONSULTA">
+      <EntityTypeMapping TypeName="DB_CLINICAModel.CONSULTA">
+        <MappingFragment StoreEntitySet="CONSULTA">
+          <ScalarProperty Name="cons_id" ColumnName="cons_id" />
+          <ScalarProperty Name="cons_turno" ColumnName="cons_turno" />
+          <ScalarProperty Name="cons_situacao" ColumnName="cons_situacao" />
+          <ScalarProperty Name="cons_dataConsulta" ColumnName="cons_dataConsulta" />
+          <ScalarProperty Name="pac_id" ColumnName="pac_id" />
+          <ScalarProperty Name="med_id" ColumnName="med_id" />
+          <ScalarProperty Name="conv_id" ColumnName="conv_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONVENIO">
+      <EntityTypeMapping TypeName="DB_CLINICAModel.CONVENIO">
+        <MappingFragment StoreEntitySet="CONVENIO">
+          <ScalarProperty Name="conv_id" ColumnName="conv_id" />
+          <ScalarProperty Name="conv_nome" ColumnName="conv_nome" />
+          <ScalarProperty Name="conv_sigla" ColumnName="conv_sigla" />
+          <ScalarProperty Name="conv_fone" ColumnName="conv_fone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAME">
+      <EntityTypeMapping TypeName="DB_CLINICAModel.EXAME">
+        <MappingFragment StoreEntitySet="EXAME">
+          <ScalarProperty Name="exa_id" ColumnName="exa_id" />
+          <ScalarProperty Name="exa_nome" ColumnName="exa_nome" />
+          <ScalarProperty Name="exa_observacoes" ColumnName="exa_observacoes" />
+          <ScalarProperty Name="pac_id" ColumnName="pac_id" />
+          <ScalarProperty Name="exa_valor" ColumnName="exa_valor" />
+          <ScalarProperty Name="conv_id" ColumnName="conv_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEDICO">
+      <EntityTypeMapping TypeName="DB_CLINICAModel.MEDICO">
+        <MappingFragment StoreEntitySet="MEDICO">
+          <ScalarProperty Name="med_id" ColumnName="med_id" />
+          <ScalarProperty Name="med_nom" ColumnName="med_nom" />
+          <ScalarProperty Name="med_end" ColumnName="med_end" />
+          <ScalarProperty Name="med_cpf" ColumnName="med_cpf" />
+          <ScalarProperty Name="med_fone" ColumnName="med_fone" />
+          <ScalarProperty Name="med_crm" ColumnName="med_crm" />
+          <ScalarProperty Name="med_cidade" ColumnName="med_cidade" />
+          <ScalarProperty Name="med_estado" ColumnName="med_estado" />
+          <ScalarProperty Name="med_qtd_atend" ColumnName="med_qtd_atend" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PACIENTE">
+      <EntityTypeMapping TypeName="DB_CLINICAModel.PACIENTE">
+        <MappingFragment StoreEntitySet="PACIENTE">
+          <ScalarProperty Name="pac_id" ColumnName="pac_id" />
+          <ScalarProperty Name="pac_nome" ColumnName="pac_nome" />
+          <ScalarProperty Name="pac_end" ColumnName="pac_end" />
+          <ScalarProperty Name="pac_cpf" ColumnName="pac_cpf" />
+          <ScalarProperty Name="pac_fone" ColumnName="pac_fone" />
+          <ScalarProperty Name="pac_dataNasc" ColumnName="pac_dataNasc" />
+          <ScalarProperty Name="pac_sexo" ColumnName="pac_sexo" />
+          <ScalarProperty Name="pac_plano" ColumnName="pac_plano" />
+          <ScalarProperty Name="pac_estado" ColumnName="pac_estado" />
+          <ScalarProperty Name="pac_cidade" ColumnName="pac_cidade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

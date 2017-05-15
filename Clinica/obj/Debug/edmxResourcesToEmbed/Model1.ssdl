@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_CLINICAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CONSULTA">
+    <Key>
+      <PropertyRef Name="cons_id" />
+    </Key>
+    <Property Name="cons_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cons_turno" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="cons_situacao" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cons_dataConsulta" Type="datetime" Nullable="false" />
+    <Property Name="pac_id" Type="int" Nullable="false" />
+    <Property Name="med_id" Type="int" Nullable="false" />
+    <Property Name="conv_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CONVENIO">
+    <Key>
+      <PropertyRef Name="conv_id" />
+    </Key>
+    <Property Name="conv_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="conv_nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="conv_sigla" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="conv_fone" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EXAME">
+    <Key>
+      <PropertyRef Name="exa_id" />
+    </Key>
+    <Property Name="exa_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="exa_nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="exa_observacoes" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pac_id" Type="int" Nullable="false" />
+    <Property Name="exa_valor" Type="money" Nullable="false" />
+    <Property Name="conv_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MEDICO">
+    <Key>
+      <PropertyRef Name="med_id" />
+    </Key>
+    <Property Name="med_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="med_nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="med_end" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="med_cpf" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="med_fone" Type="int" />
+    <Property Name="med_crm" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="med_cidade" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="med_estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="med_qtd_atend" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PACIENTE">
+    <Key>
+      <PropertyRef Name="pac_id" />
+    </Key>
+    <Property Name="pac_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pac_nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pac_end" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pac_cpf" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pac_fone" Type="int" />
+    <Property Name="pac_dataNasc" Type="date" Nullable="false" />
+    <Property Name="pac_sexo" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="pac_plano" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pac_estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pac_cidade" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CONSULTA_CONVENIO">
+    <End Role="CONVENIO" Type="Self.CONVENIO" Multiplicity="1" />
+    <End Role="CONSULTA" Type="Self.CONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONVENIO">
+        <PropertyRef Name="conv_id" />
+      </Principal>
+      <Dependent Role="CONSULTA">
+        <PropertyRef Name="conv_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONSULTA_MEDICO">
+    <End Role="MEDICO" Type="Self.MEDICO" Multiplicity="1" />
+    <End Role="CONSULTA" Type="Self.CONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICO">
+        <PropertyRef Name="med_id" />
+      </Principal>
+      <Dependent Role="CONSULTA">
+        <PropertyRef Name="med_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONSULTA_PACIENTE">
+    <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="1" />
+    <End Role="CONSULTA" Type="Self.CONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PACIENTE">
+        <PropertyRef Name="pac_id" />
+      </Principal>
+      <Dependent Role="CONSULTA">
+        <PropertyRef Name="pac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAME_CONVENIO">
+    <End Role="CONVENIO" Type="Self.CONVENIO" Multiplicity="1" />
+    <End Role="EXAME" Type="Self.EXAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONVENIO">
+        <PropertyRef Name="conv_id" />
+      </Principal>
+      <Dependent Role="EXAME">
+        <PropertyRef Name="conv_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAME_PACIENTE">
+    <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="1" />
+    <End Role="EXAME" Type="Self.EXAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PACIENTE">
+        <PropertyRef Name="pac_id" />
+      </Principal>
+      <Dependent Role="EXAME">
+        <PropertyRef Name="pac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_CLINICAModelStoreContainer">
+    <EntitySet Name="CONSULTA" EntityType="Self.CONSULTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CONVENIO" EntityType="Self.CONVENIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EXAME" EntityType="Self.EXAME" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MEDICO" EntityType="Self.MEDICO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CONSULTA_CONVENIO" Association="Self.FK_CONSULTA_CONVENIO">
+      <End Role="CONVENIO" EntitySet="CONVENIO" />
+      <End Role="CONSULTA" EntitySet="CONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONSULTA_MEDICO" Association="Self.FK_CONSULTA_MEDICO">
+      <End Role="MEDICO" EntitySet="MEDICO" />
+      <End Role="CONSULTA" EntitySet="CONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONSULTA_PACIENTE" Association="Self.FK_CONSULTA_PACIENTE">
+      <End Role="PACIENTE" EntitySet="PACIENTE" />
+      <End Role="CONSULTA" EntitySet="CONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAME_CONVENIO" Association="Self.FK_EXAME_CONVENIO">
+      <End Role="CONVENIO" EntitySet="CONVENIO" />
+      <End Role="EXAME" EntitySet="EXAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAME_PACIENTE" Association="Self.FK_EXAME_PACIENTE">
+      <End Role="PACIENTE" EntitySet="PACIENTE" />
+      <End Role="EXAME" EntitySet="EXAME" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
