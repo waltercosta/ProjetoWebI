@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.ComponentModel;
+using System.Data.Entity.Migrations;
 
 namespace Clinica.Controllers
 {
