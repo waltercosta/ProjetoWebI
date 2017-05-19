@@ -12,7 +12,7 @@ namespace Clinica.Controllers
     [DataObject(true)]
     public class ConvenioController
     {
-        #region select
+        #region Select
         [DataObjectMethod(DataObjectMethodType.Select)]
         public static List<CONVENIO> selectConvenio(string nome, int fone)
         {

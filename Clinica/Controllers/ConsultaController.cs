@@ -12,6 +12,7 @@ namespace Clinica.Controllers
     [DataObject(true)]
     public class ConsultaController
     {
+        #region Select
         [DataObjectMethod(DataObjectMethodType.Select)]
         public static List<CONSULTA> selectConsulta(PACIENTE paciente, MEDICO medico, string turno)
         {
@@ -22,7 +23,9 @@ namespace Clinica.Controllers
                                 (c.cons_turno.Contains(turno) || turno  == null)
                                 ).ToList();
         }
+        #endregion
 
+        #region Insert
         [DataObjectMethod(DataObjectMethodType.Insert)]
         public static int adcionarConsulta (CONSULTA consulta)
         {
@@ -30,7 +33,9 @@ namespace Clinica.Controllers
             context.CONSULTA.Add(consulta);
             return context.SaveChanges();
         }
+        #endregion
 
+        #region Delete
         [DataObjectMethod(DataObjectMethodType.Delete)]
         public static int deletarConsulta (CONSULTA consulta)
         {
@@ -38,7 +43,10 @@ namespace Clinica.Controllers
             context.CONSULTA.Remove(consulta);
             return context.SaveChanges();
         }
+        #endregion
 
+        
+        #region Update
         [DataObjectMethod(DataObjectMethodType.Update)]
         public static int atualizarConsulta ( CONSULTA consulta)
         {
@@ -46,5 +54,6 @@ namespace Clinica.Controllers
             context.CONSULTA.AddOrUpdate(consulta);
             return context.SaveChanges();
         }
+#endregion
     }
 }

@@ -3,12 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" DataObjectTypeName="Clinica.MEDICO" DeleteMethod="deletarMedico" InsertMethod="adcionarMedico" OldValuesParameterFormatString="original_{0}" SelectMethod="selectMedico" TypeName="Clinica.Controllers.MedicoController" UpdateMethod="atualizarMedico">
+    <asp:ObjectDataSource ID="ods_medico" runat="server" DataObjectTypeName="Clinica.MEDICO" DeleteMethod="deletarMedico" InsertMethod="adcionarMedico" OldValuesParameterFormatString="original_{0}" SelectMethod="selectMedico" TypeName="Clinica.Controllers.MedicoController" UpdateMethod="atualizarMedico">
         <SelectParameters>
             <asp:Parameter Name="id" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    <asp:FormView ID="FormView1" runat="server" DataSourceID="ObjectDataSource1">
+    <asp:FormView ID="fw_medico" runat="server" DataSourceID="ods_medico" DefaultMode="Insert">
         <EditItemTemplate>
             med_id:
             <asp:TextBox ID="med_idTextBox" runat="server" Text='<%# Bind("med_id") %>' />
@@ -40,42 +40,37 @@
             CONSULTA:
             <asp:TextBox ID="CONSULTATextBox" runat="server" Text='<%# Bind("CONSULTA") %>' />
             <br />
-            <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
-            &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+            <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Atualizar" />
+            &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
         </EditItemTemplate>
         <InsertItemTemplate>
-            med_id:
-            <asp:TextBox ID="med_idTextBox" runat="server" Text='<%# Bind("med_id") %>' />
-            <br />
-            med_nom:
+            Nome:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_nomTextBox" runat="server" Text='<%# Bind("med_nom") %>' />
             <br />
-            med_end:
+            Endereço:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_endTextBox" runat="server" Text='<%# Bind("med_end") %>' />
             <br />
-            med_cpf:
+            CPF:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_cpfTextBox" runat="server" Text='<%# Bind("med_cpf") %>' />
             <br />
-            med_fone:
+            Telefone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_foneTextBox" runat="server" Text='<%# Bind("med_fone") %>' />
             <br />
-            med_crm:
+            CRM:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_crmTextBox" runat="server" Text='<%# Bind("med_crm") %>' />
             <br />
-            med_cidade:
+            Cidade:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_cidadeTextBox" runat="server" Text='<%# Bind("med_cidade") %>' />
             <br />
-            med_estado:
+            Estado:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_estadoTextBox" runat="server" Text='<%# Bind("med_estado") %>' />
             <br />
-            med_qtd_atend:
+            Quantidade de Atendimento:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="med_qtd_atendTextBox" runat="server" Text='<%# Bind("med_qtd_atend") %>' />
             <br />
-            CONSULTA:
-            <asp:TextBox ID="CONSULTATextBox" runat="server" Text='<%# Bind("CONSULTA") %>' />
             <br />
-            <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
-            &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+            <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Inserir" />
+            &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
         </InsertItemTemplate>
         <ItemTemplate>
             med_id:
@@ -108,23 +103,32 @@
             CONSULTA:
             <asp:Label ID="CONSULTALabel" runat="server" Text='<%# Bind("CONSULTA") %>' />
             <br />
-            <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" />
-            &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete" />
-            &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="New" />
+            <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Editar" />
+            &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Excluir" />
+            &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="Novo" />
         </ItemTemplate>
+        
     </asp:FormView>
-
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1">
+    <br />
+    <asp:GridView ID="gw_medico" runat="server" AutoGenerateColumns="False" DataSourceID="ods_medico" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
         <Columns>
-            <asp:BoundField DataField="med_id" HeaderText="med_id" SortExpression="med_id" />
-            <asp:BoundField DataField="med_nom" HeaderText="med_nom" SortExpression="med_nom" />
-            <asp:BoundField DataField="med_end" HeaderText="med_end" SortExpression="med_end" />
-            <asp:BoundField DataField="med_cpf" HeaderText="med_cpf" SortExpression="med_cpf" />
-            <asp:BoundField DataField="med_fone" HeaderText="med_fone" SortExpression="med_fone" />
-            <asp:BoundField DataField="med_crm" HeaderText="med_crm" SortExpression="med_crm" />
-            <asp:BoundField DataField="med_cidade" HeaderText="med_cidade" SortExpression="med_cidade" />
-            <asp:BoundField DataField="med_estado" HeaderText="med_estado" SortExpression="med_estado" />
-            <asp:BoundField DataField="med_qtd_atend" HeaderText="med_qtd_atend" SortExpression="med_qtd_atend" />
+            <asp:BoundField DataField="med_id" HeaderText="ID" SortExpression="med_id" />
+            <asp:BoundField DataField="med_nom" HeaderText="Nome" SortExpression="med_nom" />
+            <asp:BoundField DataField="med_end" HeaderText="Endereço" SortExpression="med_end" />
+            <asp:BoundField DataField="med_cpf" HeaderText="CPF" SortExpression="med_cpf" />
+            <asp:BoundField DataField="med_fone" HeaderText="Telefone" SortExpression="med_fone" />
+            <asp:BoundField DataField="med_crm" HeaderText="CRM" SortExpression="med_crm" />
+            <asp:BoundField DataField="med_cidade" HeaderText="Cidade" SortExpression="med_cidade" />
+            <asp:BoundField DataField="med_estado" HeaderText="Estado" SortExpression="med_estado" />
+            <asp:BoundField DataField="med_qtd_atend" HeaderText="Qtd de atendimento" SortExpression="med_qtd_atend" />
         </Columns>
+        <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+        <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+        <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+        <SortedAscendingCellStyle BackColor="#F7F7F7" />
+        <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+        <SortedDescendingCellStyle BackColor="#E5E5E5" />
+        <SortedDescendingHeaderStyle BackColor="#242121" />
     </asp:GridView>
     </asp:Content>

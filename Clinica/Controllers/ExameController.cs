@@ -12,6 +12,7 @@ namespace Clinica.Controllers
     [DataObject(true)]
     public class ExameController
     {
+        #region Select
         [DataObjectMethod(DataObjectMethodType.Select)]
         public static List<EXAME> selectExame(string nome, int id)
         {
@@ -20,7 +21,9 @@ namespace Clinica.Controllers
                      && (e.exa_id == id || id == 0))
                     .ToList();
         }
+#endregion
 
+        #region Insert
         [DataObjectMethod(DataObjectMethodType.Insert)]
         public static int adcionarExame(EXAME exame)
         {
@@ -28,7 +31,9 @@ namespace Clinica.Controllers
             context.EXAME.Add(exame);
             return context.SaveChanges();
         }
+        #endregion
 
+        #region Delete
         [DataObjectMethod(DataObjectMethodType.Delete)]
         public static int deletarExame(EXAME exame)
         {
@@ -36,7 +41,9 @@ namespace Clinica.Controllers
             context.EXAME.Remove(exame);
             return context.SaveChanges();
         }
+        #endregion
 
+        #region Update
         [DataObjectMethod(DataObjectMethodType.Update)]
         public static int atualizarExame(EXAME exame)
         {
@@ -44,5 +51,6 @@ namespace Clinica.Controllers
             context.EXAME.AddOrUpdate(exame);
             return context.SaveChanges();
         }
+#endregion
     }
 }

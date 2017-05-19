@@ -14,6 +14,7 @@ namespace Clinica.Controllers
     public class PacienteController
     {
         /*Usando entities*/
+        #region Select
         [DataObjectMethod(DataObjectMethodType.Select)]
         public static List<PACIENTE> selectPaciente(string nome, string cpf)
         {
@@ -22,7 +23,9 @@ namespace Clinica.Controllers
                      && (p.pac_cpf.Contains(cpf) || cpf == null))
                     .ToList();
         }
+        #endregion
 
+        #region Insert
         [DataObjectMethod(DataObjectMethodType.Insert)]
         public static int adcionarPaciente (PACIENTE paciente)
         {
@@ -30,7 +33,9 @@ namespace Clinica.Controllers
             context.PACIENTE.Add(paciente);
             return context.SaveChanges();
         }
+        #endregion
 
+        #region Delete
         [DataObjectMethod(DataObjectMethodType.Delete)]
         public static int deletarPaciente (PACIENTE paciente)
         {
@@ -38,7 +43,9 @@ namespace Clinica.Controllers
             context.PACIENTE.Remove(paciente);
             return context.SaveChanges();
         }
+        #endregion
 
+        #region Update
         [DataObjectMethod(DataObjectMethodType.Update)]
         public static int atualizarPaciente (PACIENTE paciente)
         {
@@ -46,5 +53,6 @@ namespace Clinica.Controllers
             context.PACIENTE.AddOrUpdate(paciente);
             return context.SaveChanges();
         }
+#endregion
     }
 }
